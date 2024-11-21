@@ -25,6 +25,14 @@
                     <fmt:setLocale value="en_US"/>
                     <fmt:formatNumber type="currency" currencySymbol="$" pattern="$#,##0.00" value="${employees.salary}"/>
                 </td>
+                <td class="text-center">
+                    <c:set var="urlEdit">
+                        <c:url value="${application.contextPath}/edit">
+                            <c:param name="idEmpleado" value="${employees.idEmpleado}"/>
+                        </c:url>
+                    </c:set>
+                    <a href="${urlEdit}" class="btn btn-warning btn-sm me-3">Editar</a>
+                </td>
             </tr>
         </c:forEach>
 

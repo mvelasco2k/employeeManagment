@@ -1,5 +1,6 @@
 package gm.employees.controller;
 
+import gm.employees.EmployeesApplication;
 import gm.employees.model.Employee;
 import gm.employees.service.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -40,5 +42,13 @@ public class IndexController {
         logger.info("Empleado a agregar: "+employee);
         employeeService.addEmployee(employee);
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String showEdit(@RequestParam int idEmpleado, ModelMap model){
+        Employee employee = employeeService.findEmployeeById(idEmpleado);
+        logger.info("Empleado a editar: "+employee);
+        model.put("employee", employee);
+        return "edit";
     }
 }
