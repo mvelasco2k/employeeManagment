@@ -51,4 +51,19 @@ public class IndexController {
         model.put("employee", employee);
         return "edit";
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("employeeForm") Employee employee){
+        logger.info("Empleado a guardar: "+employee);
+        employeeService.addEmployee(employee);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@RequestParam int idEmpleado){
+        Employee employee = employeeService.findEmployeeById(idEmpleado);
+        logger.info("Empleado a borrar: "+employee);
+        employeeService.deleteEmployee(employee);
+        return "redirect:/";
+    }
 }
